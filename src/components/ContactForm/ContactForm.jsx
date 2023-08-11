@@ -2,6 +2,8 @@ import { useState } from "react";
 import css from "./ContactForm.module.css";
 import { nanoid } from "nanoid";
 import { useDispatch, useSelector } from "react-redux";
+import { createContacts } from "store/contacts/actions";
+import { createFilter } from "store/filter/actions";
 
 
 
@@ -47,19 +49,20 @@ const ContactForm =() =>{
     number:number,
       };
     
-    dispatch({ type: 'addContact', payload: newContact });
+    dispatch(createContacts(newContact));
     
     setName('');
     setNumber('');
   }      
 
   const handleChangeFilter = (e) => {
-    dispatch({type:'add', payload:e.currentTarget.value});
+    dispatch(createFilter(e.currentTarget.value));
   };                     
-  // const newFilter = filter
-  //   ? contacts.filter((contact) => contact.name.toLowerCase().includes(filter.toLowerCase()))
-  //   : contacts;
 
+const newFilter = filter
+    ? contacts.contacts.filter((contact) => contact.name.toLowerCase().includes(filter.toLowerCase()))
+    : contacts.contacts;
+  
   return(<><form action="" onSubmit={handleSubmit}>
   <div className={css.formInp}>       
   <label className={css.label}>Name</label>
@@ -87,8 +90,8 @@ value={number}>
 </div>
 
 </form>
-{contacts.contacts.length > 0 && <ul>
-    {contacts.contacts.map(({name,id, number}) => (
+{newFilter.length > 0 && <ul>
+    {newFilter.map(({name,id, number}) => (
       <li key={id} className={css.itemList}>
         {name}: {number}
         <button onClick={()=> deleteContact(id)} className={css.btn}>Delete</button>
@@ -101,7 +104,7 @@ value={number}>
 type="text" 
 name="filter"
 onChange={handleChangeFilter}
-value={filter}
+value={filter || ''}
 />
 </div>
   </>
