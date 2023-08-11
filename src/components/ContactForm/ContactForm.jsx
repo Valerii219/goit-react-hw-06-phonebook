@@ -17,7 +17,7 @@ const ContactForm =() =>{
   
 
   const deleteContact = (contactId) => {
-    const deleteC = (contacts.filter(contact => contact.id !== contactId));
+    const deleteC = (contacts.contacts.filter(contact => contact.id !== contactId));
     dispatch({ type: 'deleteContact', payload: deleteC }); // Видалити контакт через диспетчер
   };
   // const deleteContact = (contactId) => {
@@ -58,10 +58,11 @@ const ContactForm =() =>{
   const handleChangeFilter = (e) => {
     dispatch(createFilter(e.currentTarget.value));
   };                     
+  // console.log(handleChangeFilter());
 
-const newFilter = filter
-    ? contacts.contacts.filter((contact) => contact.name.toLowerCase().includes(filter.toLowerCase()))
-    : contacts.contacts;
+  const newFilter = filter
+  ? contacts.contacts.filter((contact) => contact.name.toLowerCase())
+  : contacts.contacts;
   
   return(<><form action="" onSubmit={handleSubmit}>
   <div className={css.formInp}>       
