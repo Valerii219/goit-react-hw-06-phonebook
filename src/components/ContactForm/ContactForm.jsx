@@ -15,10 +15,14 @@ const ContactForm =() =>{
   
 
   const deleteContact = (contactId) => {
-    const deleteC = contacts.filter(contact => contact.id !== contactId);
+    const deleteC = (contacts.filter(contact => contact.id !== contactId));
     dispatch({ type: 'deleteContact', payload: deleteC }); // Видалити контакт через диспетчер
   };
-
+  // const deleteContact = (contactId) => {
+  //   setContacts((prevContacts) =>
+  //     prevContacts.filter((contact) => contact.id !== contactId)
+  //   );
+  // };
 
   const [name, setName] = useState('')
   const [number, setNumber] = useState('')

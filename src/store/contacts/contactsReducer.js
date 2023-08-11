@@ -11,7 +11,7 @@ export const contactsReducer = (state = initialState, { type, payload }) => {
     case 'deleteContact':
       return {
         ...state,
-        contacts:  [...state.contacts, payload],
+        contacts: payload,
       };
     default:
       return state;
