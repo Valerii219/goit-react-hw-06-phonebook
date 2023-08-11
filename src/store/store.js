@@ -1,30 +1,21 @@
 import { createStore } from "redux";
+import { reducer } from "./reducer";
 
-const reducer =(state, action ) => {
-    switch (action.type) {
-        case 'increment':
-        return { 
-            ...state,
-            total: action.payload,
-        }
-        
-        case 'decrement':
-        return { 
-            ...state,
-            total: action.payload,
-        }
-    
-        default:
-            return state
-    }
-   
-}
 
-export const store = createStore(reducer,  {
-    contacts: [],
-    filter: ""
-  })
+// const handleAddContact = (newContact) => {
+//     const sameContact = ;
 
-console.log('store :>> ', store);
-store.dispatch({type: "newContact", payload: {}})
-console.log('store.getState() :>> ', store.getState());
+//     if (sameContact) {
+//       alert(`${sameContact.name} is already in contacts`);
+//       return;
+//     }
+
+//     setContacts((prevContacts) => [...prevContacts, newContact]);
+//   };
+
+export const store = createStore(reducer)
+// console.log('state :>> ', store.getState());
+// store.dispatch({type:"createNew", payload:"bob"});
+// store.dispatch({type:"updateAge", payload:40});
+
+// console.log('state :>> ', store.getState());
