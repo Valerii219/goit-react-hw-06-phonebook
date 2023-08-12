@@ -1,2 +1,3 @@
-export const createFilter = (value)=>({type:'filter', payload:value});
-export const createFilteredContacts = (value)=>({type:'filtered', payload:value})
+import { FILTER } from "./types";
+
+export const createFilter = (value)=>({type:FILTER, payload:value});
