@@ -62,9 +62,10 @@ const ContactForm =() =>{
     // dispatch(createFilteredContacts(newFilteredContacts)); // removed this line from here
   };
 
-  const newFilteredContacts = contacts.contacts.filter((contact) =>
-    contact.name.toLowerCase().includes(filter)
-  );
+  const newFilteredContacts = filter
+  ? contacts.contacts.filter((contact) => contact.name.toLowerCase().includes((filter.filter.toLowerCase())))
+  : contacts.contacts;
+  
   return(<><form action="" onSubmit={handleSubmit}>
   <div className={css.formInp}>       
   <label className={css.label}>Name</label>
@@ -92,8 +93,8 @@ value={number}>
 </div>
 
 </form>
-{ contacts.contacts.length > 0 && <ul>
-    {contacts.contacts.map(({name,id, number}) => (
+{ filter && newFilteredContacts.length > 0 && <ul>
+    {newFilteredContacts.map(({name,id, number}) => (
       <li key={id} className={css.itemList}>
         {name}: {number}
         <button onClick={()=> deleteContact(id)} className={css.btn}>Delete</button>
@@ -106,8 +107,10 @@ value={number}>
 type="text" 
 name="filter"
 onChange={handleChangeFilter}
-value={filter|| '' }
+value={filter.filter || '' }
+
 />
+
 </div>
   </>
     
