@@ -8,6 +8,12 @@ export const filterReducer = (state = initialState, { type, payload }) => {
           ...state,
          filter:payload
         };
+        case 'filtered':
+        return {
+          ...state,
+         filter:payload
+        };
+
   
       default:
         return state;
