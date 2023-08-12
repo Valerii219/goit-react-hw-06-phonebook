@@ -1,18 +1,13 @@
 import { useState } from "react";
 import css from "./ContactForm.module.css";
 import { nanoid } from "nanoid";
-import { useDispatch, useSelector } from "react-redux";
-import { createContacts} from "store/contacts/actions";
+import { useDispatch, useSelector, } from "react-redux";
+import { createContacts} from "store/contactsSlice/contactsSlice";
+
 
 const ContactForm =() =>{
-  const contacts = useSelector((state) => state.contacts);
-  console.log('contacts :>> ', contacts);
+  const contacts = useSelector(state => state.contacts);
   const dispatch = useDispatch();
-
-  //   // useEffect(() => {
-//   //   localStorage.setItem("contacts", JSON.stringify(contacts));
-//   // }, [contacts]);
-
   const [name, setName] = useState('')
   const [number, setNumber] = useState('')
 
@@ -21,19 +16,26 @@ const ContactForm =() =>{
             )}
     const handleChangeNumber = (e)=>{
       setNumber( e.target.value)
-                    }
+     }
 
   const handleSubmit = (e)=>{
     e.preventDefault()
       if(name === "" || number === "")
       {return
       }
+     
   
     const newContact = {
     id:nanoid(),
     name:name,
     number:number,
       };
+      const sameContact = contacts.contacts.find((contact) => contact.name === newContact.name);
+
+      if (sameContact) {
+        alert(`${sameContact.name} is already in contacts`)
+        return ;
+      }
     
     dispatch(createContacts(newContact));
     
@@ -65,9 +67,7 @@ value={number}>
 <button className={css.btn}> Add contact</button>
 </div>
 </form>
-
   </>
-    
   )
 }
 
